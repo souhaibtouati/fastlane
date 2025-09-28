@@ -1,0 +1,17 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches: [ dev, main ]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure CMake
+        run: cmake -S . -B build -DBUILD_TESTS=ON
+      - name: Build tests
+        run: cmake --build build
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure

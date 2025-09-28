@@ -1,0 +1,32 @@
+name: License Boundary Check
+
+on:
+  pull_request:
+    branches: [ dev, main ]
+
+jobs:
+  check-commercial-dirs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changes in commercial-only directories
+        run: |
+          # List of commercial-only directories
+          COMMERCIAL_DIRS="drivers services ota security docs/safety-case"
+
+          # Get list of changed files in this PR
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }})
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          for dir in $COMMERCIAL_DIRS; do
+            if echo "$CHANGED_FILES" | grep -q "^$dir/"; then
+              echo "❌ Unauthorized modification detected in $dir/"
+              echo "These directories require a commercial license and explicit maintainer approval."
+              exit 1
+            fi
+          done
+
+          echo "✅ No unauthorized changes detected."

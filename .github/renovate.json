@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+
+  "packageRules": [
+    {
+      "matchManagers": ["pip_requirements"],
+      "groupName": "Python dependencies",
+      "schedule": ["weekly"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "schedule": ["weekly"]
+    },
+    {
+      "matchManagers": ["regex"],
+      "groupName": "CMake external projects",
+      "schedule": ["weekly"],
+      "regexManagers": [
+        {
+          "fileMatch": ["(^|/)CMakeLists\\.txt$"],
+          "matchStrings": [
+            "FetchContent_Declare\\([^\\s]+\\s+GIT_REPOSITORY\\s+(?<depName>[^\\s]+)\\s+GIT_TAG\\s+(?<currentValue>[^\\s]+)"
+          ],
+          "datasourceTemplate": "git-tags"
+        }
+      ]
+    },
+    {
+      "matchManagers": ["regex"],
+      "groupName": "Zephyr west.yml modules",
+      "schedule": ["weekly"],
+      "regexManagers": [
+        {
+          "fileMatch": ["(^|/)west\\.yml$"],
+          "matchStrings": [
+            "url:\\s+(?<depName>https://[^\\s]+)\\s+revision:\\s+(?<currentValue>[^\\s]+)"
+          ],
+          "datasourceTemplate": "git-tags"
+        }
+      ]
+    }
+  ]
+}

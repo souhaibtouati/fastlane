@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Python dependencies (generator, tooling)
+  - package-ecosystem: "pip"
+    directory: "/generator"
+    schedule:
+      interval: "weekly"
+
+  # Optional: Dockerfiles (if you provide dev containers)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"

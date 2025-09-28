@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ dev, main ]
+  push:
+    branches: [ dev, main ]
+
+jobs:
+  lint-manifests:
+    name: Lint YAML manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install yamllint
+        run: sudo apt-get install -y yamllint
+      - name: Run yamllint
+        run: yamllint manifests/
+
+  build-zephyr:
+    name: Build Zephyr sample
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Zephyr dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build gperf python3-pip
+          pip3 install west
+      - name: Build Zephyr hello_world
+        run: |
+          cd adaptive-runtime/zephyr
+          west init -l .
+          west update
+          west build -b qemu_x86 samples/hello_world
+
+  build-sel4:
+    name: Build seL4 kernel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build deps
+        run: sudo apt-get install -y build-essential gcc-arm-none-eabi
+      - name: Build seL4
+        run: |
+          cd safety-kernel/sel4
+          make kernel ARCH=arm PLATFORM=tx2
