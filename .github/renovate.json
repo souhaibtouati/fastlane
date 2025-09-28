@@ -1,8 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "labels": ["dependencies"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
@@ -11,17 +9,17 @@
     {
       "matchManagers": ["pip_requirements"],
       "groupName": "Python dependencies",
-      "schedule": ["weekly"]
+      "schedule": ["before 5am on monday"]
     },
     {
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions",
-      "schedule": ["weekly"]
+      "schedule": ["before 5am on monday"]
     },
     {
       "matchManagers": ["regex"],
       "groupName": "CMake external projects",
-      "schedule": ["weekly"],
+      "schedule": ["before 5am on monday"],
       "regexManagers": [
         {
           "fileMatch": ["(^|/)CMakeLists\\.txt$"],
@@ -35,7 +33,7 @@
     {
       "matchManagers": ["regex"],
       "groupName": "Zephyr west.yml modules",
-      "schedule": ["weekly"],
+      "schedule": ["before 5am on monday"],
       "regexManagers": [
         {
           "fileMatch": ["(^|/)west\\.yml$"],

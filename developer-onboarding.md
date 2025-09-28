@@ -130,6 +130,15 @@ make bridge-test ARCH=arm PLATFORM=tx2
 [driver] Add CAN FD manifest and testvector
 [generator] Fix linker script output path
 ```
+### Pre commit
+# Install pre-commit (Python-based)
+pip install pre-commit
+
+# Install hooks into your repo
+pre-commit install
+
+# Run hooks manually on all files (first time)
+pre-commit run --all-files
 
 ---
 

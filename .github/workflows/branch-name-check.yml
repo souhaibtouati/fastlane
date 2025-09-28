@@ -1,0 +1,36 @@
+name: Branch Name Check
+
+on:
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          echo "Branch name: ${{ github.head_ref }}"
+          BRANCH_NAME="${{ github.head_ref }}"
+          ACTOR="${{ github.actor }}"
+
+          # Skip check for Dependabot and Renovate bots
+          if [[ "$ACTOR" == "dependabot[bot]" || "$ACTOR" == "renovate[bot]" ]]; then
+            echo "🤖 Skipping branch name check for bot: $ACTOR"
+            exit 0
+          fi
+
+          # Regex: allow main, dev, feature/*, fix/*, hotfix/*, release/vX.Y.Z
+          if [[ ! "$BRANCH_NAME" =~ ^(main|dev|feature\/[a-z0-9._-]+|fix\/[a-z0-9._-]+|hotfix\/[a-z0-9._-]+|release\/v[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            echo "❌ Branch name '$BRANCH_NAME' does not follow the required pattern."
+            echo "Allowed patterns:"
+            echo "  - main"
+            echo "  - dev"
+            echo "  - feature/<short-description>"
+            echo "  - fix/<short-description>"
+            echo "  - hotfix/<short-description>"
+            echo "  - release/v<major>.<minor>.<patch>"
+            exit 1
+          fi
+
+          echo "✅ Branch name is valid."

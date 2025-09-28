@@ -6,13 +6,13 @@
 /manifests/             @souhaibtouati
 
 # Drivers
-/drivers/               @souhaibtouati @driver-maintainers
+/drivers/               @souhaibtouati 
 
 # Services
-/services/              @souhaibtouati @adaptive-team
+/services/              @souhaibtouati 
 
 # Generator
-/generator/             @souhaibtouati @tooling-team
+/generator/             @souhaibtouati 
 
 # Safety kernel (seL4 submodule)
 safety-kernel/sel4/     @souhaibtouati
