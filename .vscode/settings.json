@@ -1,0 +1,17 @@
+{
+  "cmake.sourceDirectory": "${workspaceFolder}/adaptive-runtime/zephyr",
+  "cmake.generator": "Ninja",
+  "cmake.configureOnOpen": true,
+  "python.defaultInterpreterPath": "python3",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "manifests/**/*.yaml"
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.o": true,
+    "**/build": true
+  },
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false
+}

@@ -26,7 +26,7 @@ git submodule update --init --recursive
 - Python 3.10+
 - CMake + Ninja
 - ARM GCC toolchain
-- Visual Studio Code or CLion (recommended)
+- Visual Studio Code
 
 Optional:
 - Docker (for isolated builds)

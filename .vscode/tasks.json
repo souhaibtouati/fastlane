@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate ECU config",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "generator/cli/gen_config.py",
+        "--ecu",
+        "manifests/ecu/my_ecu.yaml"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Zephyr target",
+      "type": "shell",
+      "command": "west",
+      "args": [
+        "build",
+        "-b",
+        "nucleo_f429zi",
+        "samples/hello_world"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/adaptive-runtime/zephyr"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Update submodules",
+      "type": "shell",
+      "command": "git",
+      "args": [
+        "submodule",
+        "update",
+        "--init",
+        "--recursive"
+      ],
+      "group": "none",
+      "problemMatcher": []
+    }
+  ]
+}

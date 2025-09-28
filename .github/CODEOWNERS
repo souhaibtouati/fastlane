@@ -1,0 +1,21 @@
+# Core maintainers
+*                       @souhaibtouati
+
+# PAL and manifests
+/pal/                   @souhaibtouati
+/manifests/             @souhaibtouati
+
+# Drivers
+/drivers/               @souhaibtouati @driver-maintainers
+
+# Services
+/services/              @souhaibtouati @adaptive-team
+
+# Generator
+/generator/             @souhaibtouati @tooling-team
+
+# Safety kernel (seL4 submodule)
+safety-kernel/sel4/     @souhaibtouati
+
+# Adaptive runtime (Zephyr submodule)
+adaptive-runtime/zephyr/ @souhaibtouati
