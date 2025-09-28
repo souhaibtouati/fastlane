@@ -1,0 +1,6 @@
+[submodule "adaptive-runtime/zephyr"]
+	path = adaptive-runtime/zephyr
+	url = https://github.com/souhaibtouati/Fastlane-zephyr.git
+[submodule "safety-kernel/sel4"]
+	path = safety-kernel/sel4
+	url = https://github.com/souhaibtouati/fastlane-sel4.git
