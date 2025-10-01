@@ -1,20 +1,22 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+name: "🚀 Feature Request"
+about: Suggest a new feature or enhancement for fastlane
+title: "[FEATURE] <short description>"
+labels: enhancement
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## ✨ Summary
+<!-- Describe the feature you’d like -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## 🔍 Motivation
+<!-- Why is this feature important? -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## 🛠️ Proposed Solution
+<!-- How should it work? -->
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## 📚 Alternatives
+<!-- Any alternative solutions you’ve considered -->
+
+## ✅ Checklist
+- [ ] I searched existing issues
+- [ ] This feature aligns with fastlane’s goals (adaptive runtime, safety, automation)

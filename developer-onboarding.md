@@ -1,7 +1,7 @@
-
 # Developer Onboarding Guide for fastlane
 
-Welcome to **fastlane** — a modular, safety-compliant RTOS for automotive ECUs. This guide will help you set up your development environment, understand the repo structure, and start contributing effectively.
+Welcome to **fastlane** 🚦 — an adaptive, modular, safety‑compliant RTOS ecosystem for automotive ECUs and other safety‑critical domains.  
+This guide will help you set up your development environment, understand the repo structure, and start contributing effectively.
 
 ---
 
@@ -22,11 +22,11 @@ git submodule update --init --recursive
 
 ### 2. Install prerequisites
 
-- Git (with submodule support)
+- Git (with submodule support, commit signing enabled)
 - Python 3.10+
 - CMake + Ninja
 - ARM GCC toolchain
-- Visual Studio Code
+- Visual Studio Code (recommended)
 
 Optional:
 - Docker (for isolated builds)
@@ -41,20 +41,20 @@ Optional:
 | `adaptive-runtime/zephyr/` | Zephyr fork (submodule)                      |
 | `safety-kernel/sel4/`      | seL4 fork (submodule)                        |
 | `pal/`                     | Platform Abstraction Layer                   |
-| `drivers/`                 | Driver kits with manifests                   |
-| `services/`                | Adaptive microservices                       |
+| `drivers/`                 | Certified driver kits (commercial)           |
+| `services/`                | Adaptive microservices (commercial)          |
 | `manifests/`               | ECU and driver manifest definitions          |
-| `generator/`               | Codegen tools (manifest → headers/scripts)  |
+| `generator/`               | Codegen tools (manifest → headers/scripts)   |
 | `bridge/`                  | IPC bridge between domains                   |
-| `ota/`                     | OTA updater and rollback logic               |
-| `security/`                | Secure boot and key management               |
+| `ota/`                     | OTA updater and rollback logic (commercial)  |
+| `security/`                | Secure boot and key management (commercial)  |
 | `ci/`                      | CI/CD pipelines and test configs             |
 | `docs/`                    | Developer guides and safety case             |
 | `tools/`                   | CLI utilities and validators                 |
 
 ---
 
-## 🧩 Manifest-Driven Workflow
+## 🧩 Manifest‑Driven Workflow
 
 fastlane uses declarative manifests to drive configuration and code generation.
 
@@ -113,16 +113,19 @@ make bridge-test ARCH=arm PLATFORM=tx2
 
 ### Code Standards
 
-- C/C++: use `clang-format`
-- Python: follow PEP8
-- YAML: 2-space indentation, validate with `yamllint`
+- **C/C++**: enforced with `clang-format`
+- **Python**: follow PEP8, checked with `flake8`/`black`
+- **YAML**: 2‑space indentation, validated with `yamllint`
 
-### Branching
+### Branching Rules
 
-- `main`: stable releases
-- `dev`: active development
-- `feature/*`: new features
-- `fix/*`: bug fixes
+- `main`: stable releases (protected)
+- `dev`: active development (protected)
+- `feature/<short-description>`: new features
+- `fix/<short-description>`: bug fixes
+- `hotfix/<short-description>`: urgent fixes
+- `release/v<major>.<minor>.<patch>`: release branches  
+_Bot branches (`dependabot/*`, `renovate/*`) are automatically allowed._
 
 ### Commit Style
 
@@ -130,7 +133,12 @@ make bridge-test ARCH=arm PLATFORM=tx2
 [driver] Add CAN FD manifest and testvector
 [generator] Fix linker script output path
 ```
-### Pre commit
+
+- All commits must be **signed** (`git commit -s`).
+
+### Pre‑Commit Hooks
+
+```bash
 # Install pre-commit (Python-based)
 pip install pre-commit
 
@@ -139,16 +147,31 @@ pre-commit install
 
 # Run hooks manually on all files (first time)
 pre-commit run --all-files
+```
+
+Hooks enforce formatting and linting before code reaches CI.
+
+---
+
+## 🧪 CI/CD Expectations
+
+Every PR must pass:
+- ✅ Linting (YAML, C/C++)
+- ✅ Build checks (Zephyr + seL4 samples)
+- ✅ Static analysis (`clang-tidy`, `cppcheck`)
+- ✅ Unit tests (CTest)
+- ✅ License boundary check (commercial dirs require maintainer approval)
 
 ---
 
 ## 📬 Need Help?
 
-- Issues: [GitHub Issues](https://github.com/souhaibtouati/fastlane/issues)
-- Email: souhaib@fastlane-rtos.com
-- Docs: See `docs/architecture.md`, `docs/pal-api.md`, and `docs/manifest-guide.md`
+- 🐞 Issues: [GitHub Issues](https://github.com/souhaibtouati/fastlane/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/souhaibtouati/fastlane/discussions)
+- 📧 Email: souhaib@fastlane-rtos.com
+- 📖 Docs: see `docs/architecture.md`, `docs/pal-api.md`, and `docs/manifest-guide.md`
 
 ---
 
-Welcome aboard 
+Welcome aboard — and thank you for helping build a safer, more adaptive RTOS ecosystem 🚦
 ```
